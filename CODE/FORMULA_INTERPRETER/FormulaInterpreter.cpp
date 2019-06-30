@@ -251,6 +251,7 @@ QStringList FormulaInterpreter::computeTokens(const QString &formula)
 		{
 			if (bMaybe1stOf2CharsOp)
 			{
+				bMaybe1stOf2CharsOp = false;
 				result << lastChar;
 				buffer = currentChar;
 				continue;
@@ -271,6 +272,7 @@ QStringList FormulaInterpreter::computeTokens(const QString &formula)
 		{
 			if (bMaybe1stOf2CharsOp)
 			{
+				bMaybe1stOf2CharsOp = false;
 				result << lastChar;
 				buffer = currentChar;
 				continue;
