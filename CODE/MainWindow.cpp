@@ -71,7 +71,7 @@ void MainWindow::setupWidget()
 	
 	// end
 	this->resize(600,500);
-	//this->setWindowIcon(QIcon{":/RESOURCES/ICONES/gamepad.png"});
+	this->setWindowIcon(QIcon{":/RESOURCES/ICONES/calculator.png"});
 	this->setWindowTitle("Formula interpreter");
 }
 

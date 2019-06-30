@@ -39,3 +39,7 @@ SOURCES +=  CODE/main.cpp \
 			CODE/FORMULA_INTERPRETER/AssignOperatorStrategy.cpp \
 			CODE/FORMULA_INTERPRETER/SyntaxicNodeFactory.cpp
 
+
+RESOURCES += resources.qrc
+RC_FILE += icone.rc
+
