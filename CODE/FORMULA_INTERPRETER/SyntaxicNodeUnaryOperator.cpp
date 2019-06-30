@@ -1,5 +1,5 @@
 #include "SyntaxicNodeUnaryOperator.h"
-#include "ExceptionInterpreter.h"
+#include "../ExceptionInterpreter.h"
 
 
 ///////////////////////////////////////////////////////////////////////////////
@@ -19,7 +19,7 @@ SyntaxicNodeUnaryOperator::SyntaxicNodeUnaryOperator(const UnaryOperator &uo, Ab
 }
 
 // EVAL ///////////////////////////////////////////////////////////////////////
-Any SyntaxicNodeUnaryOperator::eval(const SimuData &sd) const
+Any SyntaxicNodeUnaryOperator::eval(SimuData *sd) const
 {
 	if (m_children.size() != 1)
 	{

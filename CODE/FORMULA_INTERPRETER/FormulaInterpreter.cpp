@@ -1,6 +1,6 @@
 #include "FormulaInterpreter.h"
 #include "AbstractSyntaxicNode.h"
-#include "ExceptionInterpreter.h"
+#include "../ExceptionInterpreter.h"
 
 #include "SyntaxicNodeFactory.h"
 #include "../stringVerifications.h"
@@ -41,7 +41,7 @@ FormulaInterpreter::~FormulaInterpreter()
 }
 
 // EVAL ///////////////////////////////////////////////////////////////////////
-Any FormulaInterpreter::eval(const QString &formula, const SimuData &sd)
+Any FormulaInterpreter::eval(const QString &formula, SimuData *sd)
 {
 	// normalize formula
 	QString formula2 = FormulaInterpreter::normalizeFormula(formula);

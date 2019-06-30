@@ -1,5 +1,5 @@
 #include "SyntaxicNodeBinaryOperator.h"
-#include "ExceptionInterpreter.h"
+#include "../ExceptionInterpreter.h"
 
 
 ///////////////////////////////////////////////////////////////////////////////
@@ -19,7 +19,7 @@ SyntaxicNodeBinaryOperator::SyntaxicNodeBinaryOperator(const BinaryOperator &bo,
 }
 
 // EVAL ///////////////////////////////////////////////////////////////////////
-Any SyntaxicNodeBinaryOperator::eval(const SimuData &sd) const
+Any SyntaxicNodeBinaryOperator::eval(SimuData *sd) const
 {
 	if (m_children.size() == 0)
 	{

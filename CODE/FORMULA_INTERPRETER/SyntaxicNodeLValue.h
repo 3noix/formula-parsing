@@ -15,7 +15,7 @@ class SyntaxicNodeLValue : public AbstractSyntaxicNode
 		SyntaxicNodeLValue& operator=(SyntaxicNodeLValue &&other) = delete;
 		virtual ~SyntaxicNodeLValue() = default;
 		
-		virtual Any eval(const SimuData &sd) const override final;
+		virtual Any eval(SimuData *sd) const override final;
 		virtual QString toStringHelper(int offset) const override final;
 		
 		

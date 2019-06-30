@@ -4,6 +4,7 @@
 #include <QtDebug>
 
 #include "FORMULA_INTERPRETER/FormulaInterpreter.h"
+#include "ExceptionInterpreter.h"
 
 #define DEBUG_MODE
 
@@ -58,13 +59,13 @@ int main(int argc, char *argv[])
 		bool b1 = interpreter.prepare(formula1,&errors1);
 		if (!b1) {qDebug() << "ERRORS:\n    " << errors1.join("\n    ");};
 		
-		Any result1 = interpreter.eval(formula1,sd);
+		Any result1 = interpreter.eval(formula1,&sd);
 		qDebug() << "result1 = " << toString(result1);
 		qDebug() << "";
 	}
-	catch (const std::exception &e)
+	catch (const ExceptionInterpreter &e)
 	{
-		qDebug() << e.what();
+		qDebug() << e.text();
 		qDebug() << "";
 	}
 	
@@ -77,13 +78,13 @@ int main(int argc, char *argv[])
 		bool b2 = interpreter.prepare(formula2,&errors2);
 		if (!b2) {qDebug() << "ERRORS:\n    " << errors2.join("\n    ");};
 		
-		Any result2 = interpreter.eval(formula2,sd);
+		Any result2 = interpreter.eval(formula2,&sd);
 		qDebug() << "result1 = " << toString(result2);
 		qDebug() << "";
 	}
-	catch (const std::exception &e)
+	catch (const ExceptionInterpreter &e)
 	{
-		qDebug() << e.what();
+		qDebug() << e.text();
 		qDebug() << "";
 	}
 	

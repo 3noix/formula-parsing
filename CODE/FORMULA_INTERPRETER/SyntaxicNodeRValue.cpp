@@ -1,5 +1,5 @@
 #include "SyntaxicNodeRValue.h"
-#include "ExceptionInterpreter.h"
+#include "../ExceptionInterpreter.h"
 #include "../stringVerifications.h"
 
 
@@ -35,7 +35,7 @@ SyntaxicNodeRValue::SyntaxicNodeRValue(const QString &rValueStr, AbstractSyntaxi
 }
 
 // EVAL ///////////////////////////////////////////////////////////////////////
-Any SyntaxicNodeRValue::eval(const SimuData &sd) const
+Any SyntaxicNodeRValue::eval(SimuData *sd) const
 {
 	Q_UNUSED(sd)
 	return m_rValue;

@@ -1,5 +1,5 @@
 #include "AnyOperators.h"
-#include "ExceptionAnyOperator.h"
+#include "../ExceptionInterpreter.h"
 
 
 ///////////////////////////////////////////////////////////////////////////////
@@ -38,7 +38,7 @@ Any operator+(const Any &a1, const Any &a2)
 	else if (b1is && b2ds) {return convertTo<int>(a1)    + convertTo<double>(a2);}
 	
 	QString message = "operator+(const Any&, const Any&) : types not supported";
-	throw ExceptionAnyOperator{qPrintable(message)};
+	throw ExceptionInterpreter{message};
 }
 
 // OPERATOR- //////////////////////////////////////////////////////////////////
@@ -56,7 +56,7 @@ Any operator-(const Any &a1, const Any &a2)
 	else if (b1is && b2ds) {return convertTo<int>(a1)    - convertTo<double>(a2);}
 	
 	QString message = "operator-(const Any&, const Any&) : types not supported";
-	throw ExceptionAnyOperator{qPrintable(message)};
+	throw ExceptionInterpreter{message};
 }
 
 Any operator-(const Any &a)
@@ -65,7 +65,7 @@ Any operator-(const Any &a)
 	else if (isa<int>(a)) {return -convertTo<int>(a);}
 	
 	QString message = "operator-(const Any&) : type not supported";
-	throw ExceptionAnyOperator{qPrintable(message)};
+	throw ExceptionInterpreter{message};
 }
 
 // OPERATOR* //////////////////////////////////////////////////////////////////
@@ -83,7 +83,7 @@ Any operator*(const Any &a1, const Any &a2)
 	else if (b1is && b2ds) {return convertTo<int>(a1)    * convertTo<double>(a2);}
 	
 	QString message = "operator*(const Any&, const Any&) : types not supported";
-	throw ExceptionAnyOperator{qPrintable(message)};
+	throw ExceptionInterpreter{message};
 }
 
 // OPERATOR/ //////////////////////////////////////////////////////////////////
@@ -101,7 +101,7 @@ Any operator/(const Any &a1, const Any &a2)
 	else if (b1is && b2ds) {return convertTo<int>(a1)    / convertTo<double>(a2);}
 	
 	QString message = "operator/(const Any&, const Any&) : types not supported";
-	throw ExceptionAnyOperator{qPrintable(message)};
+	throw ExceptionInterpreter{message};
 }
 
 // OPERATOR% //////////////////////////////////////////////////////////////////
@@ -113,7 +113,7 @@ Any operator%(const Any &a1, const Any &a2)
 	if (b1is && b2is) {return convertTo<int>(a1) % convertTo<int>(a2);}
 	
 	QString message = "operator%(const Any&, const Any&) : types not supported";
-	throw ExceptionAnyOperator{qPrintable(message)};
+	throw ExceptionInterpreter{message};
 }
 
 
@@ -130,7 +130,7 @@ Any operator&&(const Any &a1, const Any &a2)
 	if (b1bs && b2bs) {return convertTo<bool>(a1) && convertTo<bool>(a2);}
 	
 	QString message = "operator&&(const Any&, const Any&) : types not supported";
-	throw ExceptionAnyOperator{qPrintable(message)};
+	throw ExceptionInterpreter{message};
 }
 
 // OPERATOR|| /////////////////////////////////////////////////////////////////
@@ -142,7 +142,7 @@ Any operator||(const Any &a1, const Any &a2)
 	if (b1bs && b2bs) {return convertTo<bool>(a1) || convertTo<bool>(a2);}
 	
 	QString message = "operator||(const Any&, const Any&) : types not supported";
-	throw ExceptionAnyOperator{qPrintable(message)};
+	throw ExceptionInterpreter{message};
 }
 
 // OPERATOR! //////////////////////////////////////////////////////////////////
@@ -151,7 +151,7 @@ Any operator!(const Any &a)
 	if (isa<bool>(a)) {return !convertTo<bool>(a);}
 	
 	QString message = "operator!(const Any&) : type not supported";
-	throw ExceptionAnyOperator{qPrintable(message)};
+	throw ExceptionInterpreter{message};
 }
 
 
@@ -203,7 +203,7 @@ Any operator<(const Any &a1, const Any &a2)
 	else if (b1is && b2ds) {return convertTo<int>(a1)    < convertTo<double>(a2);}
 	
 	QString message = "operator<(const Any&, const Any&) : types not supported";
-	throw ExceptionAnyOperator{qPrintable(message)};
+	throw ExceptionInterpreter{message};
 }
 
 // OPERATOR <= ////////////////////////////////////////////////////////////////
@@ -221,7 +221,7 @@ Any operator<=(const Any &a1, const Any &a2)
 	else if (b1is && b2ds) {return convertTo<int>(a1)    <= convertTo<double>(a2);}
 	
 	QString message = "operator<=(const Any&, const Any&) : types not supported";
-	throw ExceptionAnyOperator{qPrintable(message)};
+	throw ExceptionInterpreter{message};
 }
 
 // OPERATOR > /////////////////////////////////////////////////////////////////
@@ -239,7 +239,7 @@ Any operator>(const Any &a1, const Any &a2)
 	else if (b1is && b2ds) {return convertTo<int>(a1)    > convertTo<double>(a2);}
 	
 	QString message = "operator>(const Any&, const Any&) : types not supported";
-	throw ExceptionAnyOperator{qPrintable(message)};
+	throw ExceptionInterpreter{message};
 }
 
 // OPERATOR >= ////////////////////////////////////////////////////////////////
@@ -257,5 +257,5 @@ Any operator>=(const Any &a1, const Any &a2)
 	else if (b1is && b2ds) {return convertTo<int>(a1)    >= convertTo<double>(a2);}
 	
 	QString message = "operator>=(const Any&, const Any&) : types not supported";
-	throw ExceptionAnyOperator{qPrintable(message)};
+	throw ExceptionInterpreter{message};
 }

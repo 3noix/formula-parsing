@@ -20,7 +20,7 @@ class FormulaInterpreter
 		FormulaInterpreter& operator=(FormulaInterpreter &&other) = delete;
 		virtual ~FormulaInterpreter();
 		
-		Any eval(const QString &formula, const SimuData &sd);                // do throw exceptions
+		Any eval(const QString &formula, SimuData *sd = nullptr);            // do throw exceptions
 		bool prepare(const QString &formula, QStringList *errors = nullptr); // do not throw exceptions
 		
 		

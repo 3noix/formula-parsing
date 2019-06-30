@@ -1,5 +1,5 @@
 #include "SyntaxicNodeLValue.h"
-#include "ExceptionInterpreter.h"
+#include "../ExceptionInterpreter.h"
 
 
 ///////////////////////////////////////////////////////////////////////////////
@@ -18,15 +18,20 @@ SyntaxicNodeLValue::SyntaxicNodeLValue(const QString &varName, AbstractSyntaxicN
 }
 
 // EVAL ///////////////////////////////////////////////////////////////////////
-Any SyntaxicNodeLValue::eval(const SimuData &sd) const
+Any SyntaxicNodeLValue::eval(SimuData *sd) const
 {
-	if (!sd.hasParameter(m_varName))
+	if (!sd)
 	{
-		QString msg = "Parameter \""+ m_varName + "\" is not in data";
+		QString msg = "No data provided to search for variable " + m_varName;
+		throw ExceptionInterpreter{msg};
+	}
+	else if (!sd->hasParameter(m_varName))
+	{
+		QString msg = "Parameter " + m_varName + " is not in the data";
 		throw ExceptionInterpreter{msg};
 	}
 	
-	return sd[m_varName];
+	return (*sd)[m_varName];
 }
 
 // TO STRING HELPER ///////////////////////////////////////////////////////////

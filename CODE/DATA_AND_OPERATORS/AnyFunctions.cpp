@@ -1,5 +1,5 @@
 #include "AnyFunctions.h"
-#include "ExceptionAnyOperator.h"
+#include "../ExceptionInterpreter.h"
 #include <math.h>
 
 
@@ -34,7 +34,7 @@ Any abs(const Any &a)
 	}
 	
 	QString message = "abs(const Any&) : type not supported";
-	throw ExceptionAnyOperator{qPrintable(message)};
+	throw ExceptionInterpreter{message};
 }
 
 // POW ////////////////////////////////////////////////////////////////////////
@@ -52,7 +52,7 @@ Any pow(const Any &a1, const Any &a2)
 	else if (b1is && b2ds) {return pow(convertTo<int>(a1),    convertTo<double>(a2));}
 	
 	QString message = "pow(const Any&, const Any&) : types not supported";
-	throw ExceptionAnyOperator{qPrintable(message)};
+	throw ExceptionInterpreter{message};
 }
 
 // SQRT ///////////////////////////////////////////////////////////////////////
@@ -73,7 +73,7 @@ Any sqrt(const Any &a)
 	}
 	
 	QString message = "sqrt(const Any&) : type not supported";
-	throw ExceptionAnyOperator{qPrintable(message)};
+	throw ExceptionInterpreter{message};
 }
 
 
@@ -95,7 +95,7 @@ Any exp(const Any &a)
 	}
 	
 	QString message = "exp(const Any&) : type not supported";
-	throw ExceptionAnyOperator{qPrintable(message)};
+	throw ExceptionInterpreter{message};
 }
 
 // LOG ////////////////////////////////////////////////////////////////////////
@@ -112,7 +112,7 @@ Any log(const Any &a)
 	}
 	
 	QString message = "log(const Any&) : type not supported";
-	throw ExceptionAnyOperator{qPrintable(message)};
+	throw ExceptionInterpreter{message};
 }
 
 // LOG 10 /////////////////////////////////////////////////////////////////////
@@ -129,7 +129,7 @@ Any log10(const Any &a)
 	}
 	
 	QString message = "log10(const Any&) : type not supported";
-	throw ExceptionAnyOperator{qPrintable(message)};
+	throw ExceptionInterpreter{message};
 }
 
 
@@ -151,7 +151,7 @@ Any cos(const Any &a)
 	}
 	
 	QString message = "cos(const Any&) : type not supported";
-	throw ExceptionAnyOperator{qPrintable(message)};
+	throw ExceptionInterpreter{message};
 }
 
 // SIN ////////////////////////////////////////////////////////////////////////
@@ -168,7 +168,7 @@ Any sin(const Any &a)
 	}
 	
 	QString message = "sin(const Any&) : type not supported";
-	throw ExceptionAnyOperator{qPrintable(message)};
+	throw ExceptionInterpreter{message};
 }
 
 // TAN ////////////////////////////////////////////////////////////////////////
@@ -185,7 +185,7 @@ Any tan(const Any &a)
 	}
 	
 	QString message = "tan(const Any&) : type not supported";
-	throw ExceptionAnyOperator{qPrintable(message)};
+	throw ExceptionInterpreter{message};
 }
 
 // ACOS ///////////////////////////////////////////////////////////////////////
@@ -202,7 +202,7 @@ Any acos(const Any &a)
 	}
 	
 	QString message = "acos(const Any&) : type not supported";
-	throw ExceptionAnyOperator{qPrintable(message)};
+	throw ExceptionInterpreter{message};
 }
 
 // ASIN ///////////////////////////////////////////////////////////////////////
@@ -219,7 +219,7 @@ Any asin(const Any &a)
 	}
 	
 	QString message = "asin(const Any&) : type not supported";
-	throw ExceptionAnyOperator{qPrintable(message)};
+	throw ExceptionInterpreter{message};
 }
 
 // ATAN ///////////////////////////////////////////////////////////////////////
@@ -236,6 +236,6 @@ Any atan(const Any &a)
 	}
 	
 	QString message = "atan(const Any&) : type not supported";
-	throw ExceptionAnyOperator{qPrintable(message)};
+	throw ExceptionInterpreter{message};
 }
 

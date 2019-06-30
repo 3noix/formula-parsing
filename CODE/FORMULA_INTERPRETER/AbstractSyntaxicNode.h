@@ -16,7 +16,7 @@ class AbstractSyntaxicNode
 		AbstractSyntaxicNode& operator=(AbstractSyntaxicNode &&other) = delete;
 		virtual ~AbstractSyntaxicNode();
 		
-		virtual Any eval(const SimuData &sd) const = 0;
+		virtual Any eval(SimuData *sd) const = 0;
 		virtual QString toStringHelper(int offset) const = 0;
 		
 		AbstractSyntaxicNode* parent() const;
