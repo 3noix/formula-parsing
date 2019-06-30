@@ -210,14 +210,21 @@ QStringList FormulaInterpreter::computeTokens(const QString &formula)
 	
 	// initialisation and first char verification
 	QStringList result;
-	QString buffer = formula.left(1);
-	QChar firstChar = formula[0];
+	int indexStart = 0;
+	while (formula[indexStart] == '(')
+	{
+		result << "(";
+		++indexStart;
+	}
+	
+	QString buffer = formula.mid(indexStart,1);
+	QChar firstChar = formula[indexStart];
 	bool bMaybe1stOf2CharsOp = opCharFirstOf2.contains(firstChar);
-	if (!firstChar.isDigit() && !firstChar.isLetter())
-		throw ExceptionInterpreter{"First character must be a letter or a digit"};
+	if (!firstChar.isDigit() && !firstChar.isLetter() && firstChar != '(')
+		throw ExceptionInterpreter{"First character must be a letter or a digit or a left parenthesis"};
 	
 	// loop
-	for (int index=1; index<formula.size(); ++index)
+	for (int index=indexStart+1; index<formula.size(); ++index)
 	{
 		QChar lastChar = formula[index-1];
 		QChar currentChar = formula[index];
