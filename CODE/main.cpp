@@ -3,7 +3,7 @@
 #include <QFile>
 #include <QtDebug>
 
-#include "MainWindow.h"
+#include "GUI/MainWindow.h"
 
 #define DEBUG_MODE
 

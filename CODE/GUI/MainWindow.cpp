@@ -1,8 +1,8 @@
 #include "MainWindow.h"
-#include "ExceptionInterpreter.h"
 #include "TextEdit.h"
+#include "LineEdit.h"
+#include "../ExceptionInterpreter.h"
 #include <QVBoxLayout>
-#include <QLineEdit>
 
 
 ///////////////////////////////////////////////////////////////////////////////
@@ -64,7 +64,7 @@ void MainWindow::setupWidget()
 	this->setCentralWidget(mainWidget);
 	
 	textEdit = new TextEdit{this};
-	lineCommand = new QLineEdit{this};
+	lineCommand = new LineEdit{this};
 	
 	layout->addWidget(textEdit);
 	layout->addWidget(lineCommand);

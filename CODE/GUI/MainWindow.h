@@ -3,10 +3,10 @@
 
 
 #include <QMainWindow>
-#include "FORMULA_INTERPRETER/FormulaInterpreter.h"
+#include "../FORMULA_INTERPRETER/FormulaInterpreter.h"
 class TextEdit;
+class LineEdit;
 class QVBoxLayout;
-class QLineEdit;
 
 
 class MainWindow : public QMainWindow
@@ -35,7 +35,7 @@ class MainWindow : public QMainWindow
 		QWidget *mainWidget;
 		QVBoxLayout *layout;
 		TextEdit *textEdit;
-		QLineEdit *lineCommand;
+		LineEdit *lineCommand;
 		
 		FormulaInterpreter m_interpreter;
 		bool m_bFirstFormula;
