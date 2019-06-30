@@ -12,12 +12,17 @@ CONFIG += c++11 console
 DESTDIR = $$MODE
 OBJECTS_DIR = $$DESTDIR/objects
 MOC_DIR = $$DESTDIR/moc
+QT = core gui widgets
 
 
 INCLUDEPATH += $$(BOOST_PATH)
-			
-			
+
+
+HEADERS +=  CODE/TextEdit.h
+
+
 SOURCES +=  CODE/main.cpp \
+			CODE/TextEdit.cpp \
 			CODE/stringVerifications.cpp \
 			CODE/otherFunctions.cpp \
 			CODE/DATA_AND_OPERATORS/ProjectData.cpp \

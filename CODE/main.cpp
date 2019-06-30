@@ -1,10 +1,9 @@
 #include <iostream>
-#include <QCoreApplication>
+#include <QApplication>
 #include <QFile>
 #include <QtDebug>
 
-#include "FORMULA_INTERPRETER/FormulaInterpreter.h"
-#include "ExceptionInterpreter.h"
+#include "TextEdit.h"
 
 #define DEBUG_MODE
 
@@ -32,21 +31,9 @@ void myMessageOutput(QtMsgType type, const QMessageLogContext &context, const QS
 #endif
 
 
-void displayVariables(const SimuData &sd)
-{
-	for (const QString &param : sd.parameters())
-	{
-		QString msg = param + " = " + ::toString(sd[param]);
-		qDebug() << msg;
-	}
-};
-
-
 int main(int argc, char *argv[])
 {
-	QCoreApplication app{argc,argv};
-	QStringList args = app.arguments();
-	Q_UNUSED(args)
+	QApplication app{argc,argv};
 	
 	#ifdef DEBUG_MODE
 	qInstallMessageHandler(myMessageOutput);
@@ -54,67 +41,8 @@ int main(int argc, char *argv[])
 	debugFile.remove();
 	#endif
 	
-	// named variables
-	SimuData sd;
-	sd.addParameter("a",1000.0);
-	sd.addParameter("x",100.0);
-	sd.addParameter("c",3.0);
-	displayVariables(sd);
-	qDebug() << "";
-	
-	FormulaInterpreter interpreter;
-	
-	
-	// FORMULA 1 //////////////////////////////////////////////////////////////
-	try
-	{
-		QString formula1 = "a + 2.0 - x*3.0 + 5.0*(c-2.0)";
-		qDebug() << formula1;
-		
-		QStringList errors1;
-		bool b1 = interpreter.prepare(formula1,&errors1);
-		if (!b1) {qDebug() << "ERRORS:\n    " << errors1.join("\n    ");};
-		
-		/*qDebug() << "A = " << interpreter.debugInfixTokens(formula1);
-		qDebug() << "B = " << interpreter.debugPostfixTokens(formula1).join(" ");
-		qDebug() << "TREE = ";
-		for (const QString &str : interpreter.debugSyntaxicTree(formula1).trimmed().split("\n")) {qDebug() << str;}*/
-		
-		Any result1 = interpreter.eval(formula1,&sd);
-		qDebug() << "result1 = " << toString(result1);
-		qDebug() << "";
-	}
-	catch (const ExceptionInterpreter &e)
-	{
-		qDebug() << e.text();
-		qDebug() << "";
-	}
-	
-	
-	// FORMULA 2 //////////////////////////////////////////////////////////////
-	try
-	{
-		QString formula2 = "a/2 - x*3 + cos(c)";
-		qDebug() << formula2;
-		
-		QStringList errors2;
-		bool b2 = interpreter.prepare(formula2,&errors2);
-		if (!b2) {qDebug() << "ERRORS:\n    " << errors2.join("\n    ");};
-		
-		Any result2 = interpreter.eval(formula2,&sd);
-		qDebug() << "result1 = " << toString(result2);
-		qDebug() << "";
-	}
-	catch (const ExceptionInterpreter &e)
-	{
-		qDebug() << e.text();
-		qDebug() << "";
-	}
-	
-	
-	// THE END ////////////////////////////////////////////////////////////////
-	qDebug() << "Press Enter to terminate";
-	std::cin.get();
-	return 0;
+	TextEdit textEdit;
+	textEdit.show();
+	return app.exec();
 }
 
