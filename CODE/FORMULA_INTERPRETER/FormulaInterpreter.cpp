@@ -22,6 +22,7 @@ const QMap<QString,int> FormulaInterpreter::functions  = {
 //  DESTRUCTEUR
 //  EVAL
 //  PREPARE
+//  HAS PREPARED
 //
 //  POSTFIX TO SYNTAXIC TREE
 //
@@ -64,10 +65,11 @@ Any FormulaInterpreter::eval(const QString &formula, SimuData *sd)
 }
 
 // PREPARE ////////////////////////////////////////////////////////////////////
-bool FormulaInterpreter::prepare(const QString &formula, QStringList *errors)
+bool FormulaInterpreter::prepare(const QString &formula, QStringList *errors, bool bForce)
 {
-	// normalize formula
+	// normalize formula and test if it was already prepared
 	QString formula2 = FormulaInterpreter::normalizeFormula(formula);
+	if (m_syntaxicTrees.contains(formula2) && !bForce) {return true;}
 	
 	// 1st: we compute the tokens from the formula string, as strings at first
 	QStringList tokenStrings;
@@ -131,6 +133,12 @@ bool FormulaInterpreter::prepare(const QString &formula, QStringList *errors)
 	if (!root) {return false;}
 	m_syntaxicTrees.insert(formula2,root);
 	return true;
+}
+
+// HAS PREPARED ///////////////////////////////////////////////////////////////
+bool FormulaInterpreter::hasPrepared(const QString &formula) const
+{
+	return m_syntaxicTrees.contains(FormulaInterpreter::normalizeFormula(formula));
 }
 
 
