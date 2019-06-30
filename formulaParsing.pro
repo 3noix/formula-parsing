@@ -18,10 +18,12 @@ QT = core gui widgets
 INCLUDEPATH += $$(BOOST_PATH)
 
 
-HEADERS +=  CODE/TextEdit.h
+HEADERS +=  CODE/MainWindow.h \
+			CODE/TextEdit.h
 
 
 SOURCES +=  CODE/main.cpp \
+			CODE/MainWindow.cpp \
 			CODE/TextEdit.cpp \
 			CODE/stringVerifications.cpp \
 			CODE/otherFunctions.cpp \

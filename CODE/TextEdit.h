@@ -3,9 +3,7 @@
 
 
 #include <QTextEdit>
-#include "DATA_AND_OPERATORS/ProjectData.h"
-#include "FORMULA_INTERPRETER/FormulaInterpreter.h"
-class QMenu;
+#include <QColor>
 
 
 class TextEdit : public QTextEdit
@@ -20,23 +18,17 @@ class TextEdit : public QTextEdit
 		TextEdit& operator=(TextEdit &&other) = delete;
 		virtual ~TextEdit() = default;
 		
-		void showResult(const Any &a);
-		
 		
 	public slots:
-		void slotAddChevron();
-		void slotShowError(const QString &errorMessage);
+		void slotAddMessage(const QString &msg, QColor color);
 		
 		
 	private:
 		void createActions();
 		virtual void contextMenuEvent(QContextMenuEvent *event) override;
-		virtual void keyPressEvent(QKeyEvent *event) override;
 		
 		QAction *actionClear, *actionCopy, *actionSelectAll;
 		QMenu *m_menu;
-		
-		FormulaInterpreter m_interpreter;
 };
 
 

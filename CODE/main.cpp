@@ -3,7 +3,7 @@
 #include <QFile>
 #include <QtDebug>
 
-#include "TextEdit.h"
+#include "MainWindow.h"
 
 #define DEBUG_MODE
 
@@ -41,8 +41,9 @@ int main(int argc, char *argv[])
 	debugFile.remove();
 	#endif
 	
-	TextEdit textEdit;
-	textEdit.show();
+	MainWindow w;
+	w.resize(600,500);
+	w.show();
 	return app.exec();
 }
 
