@@ -1,6 +1,6 @@
 #include "ProjectData.h"
 #include "ExceptionAnyOperator.h"
-#include "VectorsOperators.h"
+//#include "VectorsOperators.h"
 #include "../otherFunctions.h"
 
 
