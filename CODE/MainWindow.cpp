@@ -20,6 +20,8 @@
 // CONSTRUCTEUR ///////////////////////////////////////////////////////////////
 MainWindow::MainWindow(QWidget *parent) : QMainWindow{parent}
 {
+	m_bFirstFormula = true;
+	
 	this->createActions();
 	this->createMenus();
 	this->createToolBar();
@@ -84,7 +86,14 @@ void MainWindow::slotCompute()
 	QString formula = lineCommand->text().trimmed();
 	lineCommand->clear();
 	if (formula.isEmpty()) {return;}
-	textEdit->slotAddMessage(">> "+formula,Qt::black);
+	
+	QString msg = "\n>> " + formula;
+	if (m_bFirstFormula)
+	{
+		msg = msg.right(msg.size()-1);
+		m_bFirstFormula = false;
+	}
+	textEdit->slotAddMessage(msg,Qt::black);
 	
 	// formula preration
 	QStringList prepErrors;

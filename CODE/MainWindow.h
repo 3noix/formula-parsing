@@ -38,6 +38,7 @@ class MainWindow : public QMainWindow
 		QLineEdit *lineCommand;
 		
 		FormulaInterpreter m_interpreter;
+		bool m_bFirstFormula;
 };
 
 
