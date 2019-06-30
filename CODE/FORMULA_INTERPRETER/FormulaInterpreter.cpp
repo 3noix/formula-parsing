@@ -31,6 +31,10 @@ const QMap<QString,int> FormulaInterpreter::functions  = {
 //  INFIX TO POSTFIX
 //  OPERATOR PRECEDENCE
 //  OPERATOR ASSOCIATIVE LEFT
+//
+//  DEBUG INFIX TOKENS
+//  DEBUG POSTFIX TOKENS
+//  DEBUG SYNTAXIC TREE
 ///////////////////////////////////////////////////////////////////////////////
 
 
@@ -59,7 +63,6 @@ Any FormulaInterpreter::eval(const QString &formula, SimuData *sd)
 	return root->eval(sd);
 }
 
-#include <QtDebug>
 // PREPARE ////////////////////////////////////////////////////////////////////
 bool FormulaInterpreter::prepare(const QString &formula, QStringList *errors)
 {
@@ -77,7 +80,7 @@ bool FormulaInterpreter::prepare(const QString &formula, QStringList *errors)
 		if (errors) {*errors << e.text();}
 		return false;
 	}
-	qDebug() << tokenStrings;
+	m_debugInfixTokensList[formula2] = tokenStrings;
 	
 	
 	// we convert "string tokens" to "structure tokens"
@@ -109,7 +112,7 @@ bool FormulaInterpreter::prepare(const QString &formula, QStringList *errors)
 	}
 	QStringList temp;
 	for (const Token &t : postfixTokens) {temp << t.value;}
-	qDebug() << "Postfix = " << temp.join(" ");
+	m_debugPostfixTokensList[formula2] = temp;
 	
 	
 	// 3rd: build the syntaxic tree
@@ -163,7 +166,6 @@ AbstractSyntaxicNode* FormulaInterpreter::postfixToSyntaxicTree(QVector<Token> p
 	}
 	
 	// verify that the tree is valid (no undefined children)
-	//for (const QString &str : root->toString().trimmed().split("\n")) {qDebug() << str;}
 	if (!root->allChildrenSpecifiedRecursive()) {throw ExceptionInterpreter{"Tree is not valid"};}
 	return root;
 }
@@ -443,5 +445,36 @@ bool FormulaInterpreter::operatorAssociativeLeft(const QString &opStr)
 {
 	if (opStr == "!" || opStr == "~") {return false;} // (unary + and - are transformed into binary ones by adding 0)
 	return true;
+}
+
+
+
+
+
+
+// DEBUG INFIX TOKENS /////////////////////////////////////////////////////////
+QStringList FormulaInterpreter::debugInfixTokens(const QString &formula)
+{
+	QString formula2 = FormulaInterpreter::normalizeFormula(formula);
+	if (!m_debugInfixTokensList.contains(formula2)) {return {};}
+	return m_debugInfixTokensList[formula2];
+}
+
+// DEBUG POSTFIX TOKENS ///////////////////////////////////////////////////////
+QStringList FormulaInterpreter::debugPostfixTokens(const QString &formula)
+{
+	QString formula2 = FormulaInterpreter::normalizeFormula(formula);
+	if (!m_debugPostfixTokensList.contains(formula2)) {return {};}
+	return m_debugPostfixTokensList[formula2];
+}
+
+// DEBUG SYNTAXIC TREE ////////////////////////////////////////////////////////
+QString FormulaInterpreter::debugSyntaxicTree(const QString &formula)
+{
+	QString formula2 = FormulaInterpreter::normalizeFormula(formula);
+	if (!m_syntaxicTrees.contains(formula2)) {return {};}
+	AbstractSyntaxicNode *root = m_syntaxicTrees[formula2];
+	if (!root) {return {};}
+	return root->toString();
 }
 

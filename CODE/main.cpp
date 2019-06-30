@@ -32,6 +32,16 @@ void myMessageOutput(QtMsgType type, const QMessageLogContext &context, const QS
 #endif
 
 
+void displayVariables(const SimuData &sd)
+{
+	for (const QString &param : sd.parameters())
+	{
+		QString msg = param + " = " + ::toString(sd[param]);
+		qDebug() << msg;
+	}
+};
+
+
 int main(int argc, char *argv[])
 {
 	QCoreApplication app{argc,argv};
@@ -44,12 +54,18 @@ int main(int argc, char *argv[])
 	debugFile.remove();
 	#endif
 	
-	FormulaInterpreter interpreter;
+	// named variables
 	SimuData sd;
 	sd.addParameter("a",1000.0);
 	sd.addParameter("x",100.0);
 	sd.addParameter("c",3.0);
+	displayVariables(sd);
+	qDebug() << "";
 	
+	FormulaInterpreter interpreter;
+	
+	
+	// FORMULA 1 //////////////////////////////////////////////////////////////
 	try
 	{
 		QString formula1 = "a + 2.0 - x*3.0 + 5.0*(c-2.0)";
@@ -58,6 +74,11 @@ int main(int argc, char *argv[])
 		QStringList errors1;
 		bool b1 = interpreter.prepare(formula1,&errors1);
 		if (!b1) {qDebug() << "ERRORS:\n    " << errors1.join("\n    ");};
+		
+		/*qDebug() << "A = " << interpreter.debugInfixTokens(formula1);
+		qDebug() << "B = " << interpreter.debugPostfixTokens(formula1).join(" ");
+		qDebug() << "TREE = ";
+		for (const QString &str : interpreter.debugSyntaxicTree(formula1).trimmed().split("\n")) {qDebug() << str;}*/
 		
 		Any result1 = interpreter.eval(formula1,&sd);
 		qDebug() << "result1 = " << toString(result1);
@@ -69,6 +90,8 @@ int main(int argc, char *argv[])
 		qDebug() << "";
 	}
 	
+	
+	// FORMULA 2 //////////////////////////////////////////////////////////////
 	try
 	{
 		QString formula2 = "a/2 - x*3 + cos(c)";
@@ -88,6 +111,8 @@ int main(int argc, char *argv[])
 		qDebug() << "";
 	}
 	
+	
+	// THE END ////////////////////////////////////////////////////////////////
 	qDebug() << "Press Enter to terminate";
 	std::cin.get();
 	return 0;

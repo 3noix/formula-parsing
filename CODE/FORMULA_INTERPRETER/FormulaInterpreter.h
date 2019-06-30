@@ -23,6 +23,11 @@ class FormulaInterpreter
 		Any eval(const QString &formula, SimuData *sd = nullptr);            // do throw exceptions
 		bool prepare(const QString &formula, QStringList *errors = nullptr); // do not throw exceptions
 		
+		// for debugging
+		QStringList debugInfixTokens(const QString &formula);
+		QStringList debugPostfixTokens(const QString &formula);
+		QString debugSyntaxicTree(const QString &formula);
+		
 		
 	private:
 		// parsing
@@ -46,6 +51,10 @@ class FormulaInterpreter
 		
 		// syntaxic trees
 		QMap<QString,AbstractSyntaxicNode*> m_syntaxicTrees;
+		
+		// for debugging
+		QMap<QString,QStringList> m_debugInfixTokensList;
+		QMap<QString,QStringList> m_debugPostfixTokensList;
 };
 
 
