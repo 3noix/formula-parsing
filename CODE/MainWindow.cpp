@@ -79,7 +79,7 @@ void MainWindow::setupWidget()
 
 
 
-
+#include <QtDebug>
 // SLOT COMPUTE ///////////////////////////////////////////////////////////////
 void MainWindow::slotCompute()
 {
@@ -98,13 +98,21 @@ void MainWindow::slotCompute()
 	// formula preration
 	QStringList prepErrors;
 	bool bPrepa = m_interpreter.prepare(formula,&prepErrors);
+	
+	/*qDebug() << "--------------------------------------------------";
+	qDebug() << "INFIX   = " + m_interpreter.debugInfixTokens(formula).join(" ");
+	qDebug() << "POSTFIX = " + m_interpreter.debugPostfixTokens(formula).join(" ");
+	qDebug() << "TREE    = ";
+	for (const QString &str : m_interpreter.debugSyntaxicTree(formula).split("\n")) {qDebug() << str;}
+	qDebug() << "";*/
+	
 	if (!bPrepa)
 	{
 		for (const QString &error : prepErrors) {textEdit->slotAddMessage(error,Qt::red);}
 		return;
 	}
 	
-	// formula computation
+	// formula evaluation
 	try
 	{
 		Any result = m_interpreter.eval(formula);
