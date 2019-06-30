@@ -163,12 +163,20 @@ AbstractSyntaxicNode* FormulaInterpreter::postfixToSyntaxicTree(QVector<Token> p
 	{
 		// get the next node that is not full of children
 		currentNode = currentNode->getNext();
-		if (!currentNode) {throw ExceptionInterpreter{"Tree is full but there are tokens left"};}
+		if (!currentNode)
+		{
+			delete root;
+			throw ExceptionInterpreter{"Tree is full but there are tokens left"};
+		}
 		
 		// create the new children, append it to current node and make it the new current one if it needs children
 		Token t = postfixTokens.takeLast();
 		AbstractSyntaxicNode *node = factory.createNode(t,currentNode);
-		if (!node) {throw ExceptionInterpreter{"Impossible to create node: "+t.value};}
+		if (!node)
+		{
+			delete root;
+			throw ExceptionInterpreter{"Impossible to create node: "+t.value};
+		}
 		currentNode->appendChild(node);
 		if (!node->allChildrenSpecified()) {currentNode = node;}
 	}
@@ -364,6 +372,7 @@ QVector<Token> FormulaInterpreter::infixToPostfix(QVector<Token> infix)
 		else if (current.type == TokenType::Function)
 		{
 			stack.push(current);
+			if (!nbArguments.isEmpty() && nbArguments.top() == 0) {nbArguments.top() = 1;}
 			nbArguments.push(0);
 		}
 		else if (current.type == TokenType::ArgumentSeparator)
