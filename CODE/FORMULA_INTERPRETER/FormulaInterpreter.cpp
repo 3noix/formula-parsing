@@ -1,5 +1,6 @@
 #include "FormulaInterpreter.h"
 #include "AbstractSyntaxicNode.h"
+#include "AssignOperatorStrategy.h"
 #include "../ExceptionInterpreter.h"
 
 #include "SyntaxicNodeFactory.h"
@@ -7,9 +8,9 @@
 #include <QStack>
 
 
-const QStringList  FormulaInterpreter::operatorsString = {"+","-","*","/","**","^","<","<=",">",">=","==","!=","!","%","&","&&","|","||","~","<<",">>"};
-const QList<QChar> FormulaInterpreter::operatorsChars  = {'+','-','*','/','^','<','=','>','!','%','&','|','~'};
-const QList<QChar> FormulaInterpreter::opCharFirstOf2  = {'*','<','>','=','!','&','|'};
+const QStringList  FormulaInterpreter::operatorsString = {"=","+","-","*","/","**","^","<","<=",">",">=","==","!=","!","%","&","&&","|","||","~","<<",">>"};
+const QList<QChar> FormulaInterpreter::operatorsChars  = {'=','+','-','*','/','^','<','>','!','%','&','|','~'};
+const QList<QChar> FormulaInterpreter::opCharFirstOf2  = {'=','*','<','>','!','&','|'};
 const QMap<QString,int> FormulaInterpreter::functions  = {
 	{"abs",1},{"pow",2},{"sqrt",1},{"exp",1},{"log",1},{"log10",1},
 	{"cos",1},{"sin",1},{"tan",1},{"tan2",2},{"acos",1},{"asin",1},{"atan",1},{"atan2",2}
@@ -42,7 +43,7 @@ const QMap<QString,int> FormulaInterpreter::functions  = {
 // DESTRUCTEUR ////////////////////////////////////////////////////////////////
 FormulaInterpreter::~FormulaInterpreter()
 {
-	qDeleteAll(m_syntaxicTrees);
+	for (PreparedFormula &pf : m_syntaxicTrees) {delete pf.root;}
 }
 
 // EVAL ///////////////////////////////////////////////////////////////////////
@@ -59,9 +60,13 @@ Any FormulaInterpreter::eval(const QString &formula, SimuData *sd)
 	}
 	
 	// compute the formula
-	AbstractSyntaxicNode *root = m_syntaxicTrees[formula2];
+	AbstractSyntaxicNode *root = m_syntaxicTrees[formula2].root;
+	QString assignedTo = m_syntaxicTrees[formula2].assignedTo;
+	
 	if (!root) {return {};}
-	return root->eval(sd);
+	Any a = root->eval(sd);
+	if (sd && !assignedTo.isEmpty()) {(*sd)[assignedTo] = a;}
+	return a;
 }
 
 // PREPARE ////////////////////////////////////////////////////////////////////
@@ -101,6 +106,16 @@ bool FormulaInterpreter::prepare(const QString &formula, QStringList *errors, bo
 	}
 	
 	
+	// verify assignment
+	AssignOperatorStrategy aos;
+	QString assignedTo = aos.assignmentTo(infixTokens);
+	if (aos.hasError())
+	{
+		if (errors) {*errors << aos.errorMessage();}
+		return false;
+	}
+	
+	
 	// 2nd: apply Shunting-Yard algo
 	QVector<Token> postfixTokens;
 	try
@@ -128,10 +143,12 @@ bool FormulaInterpreter::prepare(const QString &formula, QStringList *errors, bo
 		if (errors) {*errors << e.text();}
 		return false;
 	}
+	if (!root) {return false;}
+	
 	
 	// the end
-	if (!root) {return false;}
-	m_syntaxicTrees.insert(formula2,root);
+	PreparedFormula pf{root,assignedTo};
+	m_syntaxicTrees.insert(formula2,pf);
 	return true;
 }
 
@@ -499,7 +516,7 @@ QString FormulaInterpreter::debugSyntaxicTree(const QString &formula)
 {
 	QString formula2 = FormulaInterpreter::normalizeFormula(formula);
 	if (!m_syntaxicTrees.contains(formula2)) {return {};}
-	AbstractSyntaxicNode *root = m_syntaxicTrees[formula2];
+	AbstractSyntaxicNode *root = m_syntaxicTrees[formula2].root;
 	if (!root) {return {};}
 	return root->toString();
 }

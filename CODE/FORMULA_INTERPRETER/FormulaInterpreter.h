@@ -10,6 +10,13 @@
 class AbstractSyntaxicNode;
 
 
+struct PreparedFormula
+{
+	AbstractSyntaxicNode *root;
+	QString assignedTo;
+};
+
+
 class FormulaInterpreter
 {
 	public:
@@ -51,7 +58,7 @@ class FormulaInterpreter
 		static const QMap<QString,int> functions;
 		
 		// syntaxic trees
-		QMap<QString,AbstractSyntaxicNode*> m_syntaxicTrees;
+		QMap<QString,PreparedFormula> m_syntaxicTrees;
 		
 		// for debugging
 		QMap<QString,QStringList> m_debugInfixTokensList;

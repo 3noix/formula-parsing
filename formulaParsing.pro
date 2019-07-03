@@ -29,5 +29,6 @@ SOURCES +=  CODE/main.cpp \
 			CODE/FORMULA_INTERPRETER/SyntaxicNodeRValue.cpp \
 			CODE/FORMULA_INTERPRETER/SyntaxicNodeUnaryOperator.cpp \
 			CODE/FORMULA_INTERPRETER/SyntaxicNodeBinaryOperator.cpp \
+			CODE/FORMULA_INTERPRETER/AssignOperatorStrategy.cpp \
 			CODE/FORMULA_INTERPRETER/SyntaxicNodeFactory.cpp
 
