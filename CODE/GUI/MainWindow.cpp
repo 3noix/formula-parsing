@@ -115,7 +115,7 @@ void MainWindow::slotCompute()
 	// formula evaluation
 	try
 	{
-		Any result = m_interpreter.eval(formula);
+		Any result = m_interpreter.eval(formula,&m_workspace);
 		textEdit->slotAddMessage(::toString(result),Qt::black);
 	}
 	catch (const ExceptionInterpreter &e)
