@@ -2,7 +2,7 @@
 
 Math formula evaluation using Shunting-Yard algorithm.
 
-To make it work you have to download:
-- Qt 5
-- The sources of boost (no need to build it), because it uses "boost::any"
-- Create the environment variable "BOOST_PATH" with the path to the sources at the value
+To make it work you have to:
+- Install Qt 5
+- Download the sources of boost (no need to build it), because it uses "boost::any". This app has been done with boost 1.56.0
+- Create the environment variable called "BOOST_PATH" whose value is the path to boost sources
