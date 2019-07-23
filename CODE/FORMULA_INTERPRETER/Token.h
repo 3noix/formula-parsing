@@ -14,7 +14,8 @@ enum class TokenType
 	Operator,
 	LeftParenthesis,
 	RightParenthesis,
-	ArgumentSeparator
+	ArgumentSeparator,
+	LValueOrFunction // useful temporarily in first steps
 };
 
 

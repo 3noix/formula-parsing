@@ -106,6 +106,20 @@ bool FormulaInterpreter::prepare(const QString &formula, QStringList *errors, bo
 	}
 	
 	
+	// clarify between function and lvalues (to do so we check if next token is "(" or not
+	int nbInfixTokens = infixTokens.size();
+	for (int i=0; i<nbInfixTokens-1; ++i)
+	{
+		Token &t = infixTokens[i];
+		if (t.type == TokenType::LValueOrFunction)
+		{
+			if (infixTokens[i+1].type == TokenType::LeftParenthesis) {t.type = TokenType::Function;}
+			else {t.type = TokenType::LValue;}
+		}
+	}
+	if (infixTokens.last().type == TokenType::LValueOrFunction) {infixTokens.last().type = TokenType::LValue;}
+	
+	
 	// verify assignment
 	AssignOperatorStrategy aos;
 	QString assignedTo = aos.assignmentTo(infixTokens);
@@ -173,9 +187,18 @@ AbstractSyntaxicNode* FormulaInterpreter::postfixToSyntaxicTree(QVector<Token> p
 	SyntaxicNodeFactory factory;
 	AbstractSyntaxicNode *root = factory.createNode(postfixTokens.takeLast(),nullptr);
 	if (!root) {throw ExceptionInterpreter{"Failed to create root"};}
-	AbstractSyntaxicNode *currentNode = root;
-	if (currentNode->allChildrenSpecified()) {return root;}
+	if (root->allChildrenSpecified())
+	{
+		if (!postfixTokens.isEmpty())
+		{
+			delete root;
+			throw ExceptionInterpreter{"Tree is full but there are tokens left"};
+		}
+		return root;
+	}
 	
+	// loop
+	AbstractSyntaxicNode *currentNode = root;
 	while (!postfixTokens.isEmpty())
 	{
 		// get the next node that is not full of children
@@ -363,8 +386,7 @@ QStringList FormulaInterpreter::computeTokens(const QString &formula)
 Token FormulaInterpreter::stringToToken(const QString &str)
 {
 	if (isInt(str) || isDouble(str) || isBool(str)) {return Token{str,TokenType::RValue};}
-	else if (functions.contains(str))               {return Token{str,TokenType::Function};}
-	else if (isParamName(str))                      {return Token{str,TokenType::LValue};}
+	else if (isParamName(str))                      {return Token{str,TokenType::LValueOrFunction};}
 	else if (operatorsString.contains(str))         {return Token{str,TokenType::Operator};}
 	else if (str == "(")                            {return Token{str,TokenType::LeftParenthesis};}
 	else if (str == ")")                            {return Token{str,TokenType::RightParenthesis};}
