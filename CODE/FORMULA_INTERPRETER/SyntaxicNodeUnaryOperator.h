@@ -16,7 +16,7 @@ class SyntaxicNodeUnaryOperator : public AbstractSyntaxicNode
 		SyntaxicNodeUnaryOperator& operator=(SyntaxicNodeUnaryOperator &&other) = delete;
 		virtual ~SyntaxicNodeUnaryOperator() = default;
 		
-		virtual Any eval(SimuData *sd) const override final;
+		virtual Any eval(WorkspaceData *sd) const override final;
 		virtual QString toStringHelper(int offset) const override final;
 		
 		

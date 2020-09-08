@@ -6,7 +6,7 @@
 #include <QMap>
 
 #include "Token.h"
-#include "../DATA_AND_OPERATORS/ProjectData.h"
+#include "../DATA_AND_OPERATORS/WorkspaceData.h"
 class AbstractSyntaxicNode;
 
 
@@ -27,7 +27,7 @@ class FormulaInterpreter
 		FormulaInterpreter& operator=(FormulaInterpreter &&other) = delete;
 		virtual ~FormulaInterpreter();
 		
-		Any eval(const QString &formula, SimuData *sd = nullptr);                                 // do throw exceptions
+		Any eval(const QString &formula, WorkspaceData *sd = nullptr);                            // do throw exceptions
 		bool prepare(const QString &formula, QStringList *errors = nullptr, bool bForce = false); // do not throw exceptions
 		bool hasPrepared(const QString &formula) const;
 		

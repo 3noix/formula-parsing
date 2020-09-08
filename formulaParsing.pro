@@ -7,7 +7,7 @@ CONFIG(release, debug|release) {
 
 
 TEMPLATE = app
-TARGET = formulaParsing
+TARGET = FormulaParsing
 CONFIG += c++11
 DESTDIR = $$MODE
 OBJECTS_DIR = $$DESTDIR/objects
@@ -29,7 +29,7 @@ SOURCES +=  CODE/main.cpp \
 			CODE/GUI/LineEdit.cpp \
 			CODE/stringVerifications.cpp \
 			CODE/otherFunctions.cpp \
-			CODE/DATA_AND_OPERATORS/ProjectData.cpp \
+			CODE/DATA_AND_OPERATORS/WorkspaceData.cpp \
 			CODE/DATA_AND_OPERATORS/AnyOperators.cpp \
 			CODE/DATA_AND_OPERATORS/AnyFunctions.cpp \
 			CODE/FORMULA_INTERPRETER/FormulaInterpreter.cpp \

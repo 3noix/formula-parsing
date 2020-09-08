@@ -19,7 +19,7 @@ SyntaxicNodeUnaryOperator::SyntaxicNodeUnaryOperator(const UnaryOperator &uo, Ab
 }
 
 // EVAL ///////////////////////////////////////////////////////////////////////
-Any SyntaxicNodeUnaryOperator::eval(SimuData *sd) const
+Any SyntaxicNodeUnaryOperator::eval(WorkspaceData *sd) const
 {
 	if (m_children.size() != 1)
 	{

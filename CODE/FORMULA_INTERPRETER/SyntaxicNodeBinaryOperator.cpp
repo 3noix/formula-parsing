@@ -19,7 +19,7 @@ SyntaxicNodeBinaryOperator::SyntaxicNodeBinaryOperator(const BinaryOperator &bo,
 }
 
 // EVAL ///////////////////////////////////////////////////////////////////////
-Any SyntaxicNodeBinaryOperator::eval(SimuData *sd) const
+Any SyntaxicNodeBinaryOperator::eval(WorkspaceData *sd) const
 {
 	if (m_children.size() == 0)
 	{

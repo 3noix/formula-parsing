@@ -14,7 +14,6 @@
 //
 //  ABSOLUTE TO RELATIVE
 //  RELATIVE TO ABSOLUTE
-//  COMPUTE PATH
 ///////////////////////////////////////////////////////////////////////////////
 
 
@@ -145,12 +144,5 @@ QString relative2absolute(QString refPath, QString relPath)
 	{
 		return refPath + "/" + relPath;
 	}
-}
-
-// COMPUTE PATH ///////////////////////////////////////////////////////////////
-QString computePath(const ProjectData &data, QString path, bool bAbsolute)
-{
-	if (bAbsolute) {return path;}
-	return path.replace("$PROJECT_DIR",data.projectDirPath());
 }
 

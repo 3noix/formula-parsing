@@ -4,7 +4,6 @@
 
 #include <QString>
 #include <QList>
-#include "DATA_AND_OPERATORS/ProjectData.h"
 
 
 bool isDebug();
@@ -16,8 +15,6 @@ QString dirName(QString longName);
 
 QString absolute2relative(QString refPath, QString absPath);
 QString relative2absolute(QString refPath, QString relPath);
-
-QString computePath(const ProjectData &data, QString path, bool bAbsolute);
 
 
 

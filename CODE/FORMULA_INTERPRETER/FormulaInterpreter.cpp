@@ -47,7 +47,7 @@ FormulaInterpreter::~FormulaInterpreter()
 }
 
 // EVAL ///////////////////////////////////////////////////////////////////////
-Any FormulaInterpreter::eval(const QString &formula, SimuData *sd)
+Any FormulaInterpreter::eval(const QString &formula, WorkspaceData *sd)
 {
 	// normalize formula
 	QString formula2 = FormulaInterpreter::normalizeFormula(formula);

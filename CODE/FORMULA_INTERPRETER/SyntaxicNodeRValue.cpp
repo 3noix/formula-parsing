@@ -35,7 +35,7 @@ SyntaxicNodeRValue::SyntaxicNodeRValue(const QString &rValueStr, AbstractSyntaxi
 }
 
 // EVAL ///////////////////////////////////////////////////////////////////////
-Any SyntaxicNodeRValue::eval(SimuData *sd) const
+Any SyntaxicNodeRValue::eval(WorkspaceData *sd) const
 {
 	Q_UNUSED(sd)
 	return m_rValue;

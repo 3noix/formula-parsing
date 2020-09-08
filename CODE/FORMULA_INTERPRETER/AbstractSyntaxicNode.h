@@ -2,7 +2,7 @@
 #define ABSTRACT_SYNTAXIC_NODE
 
 
-#include "../DATA_AND_OPERATORS/ProjectData.h"
+#include "../DATA_AND_OPERATORS/WorkspaceData.h"
 #include <QVector>
 
 
@@ -16,7 +16,7 @@ class AbstractSyntaxicNode
 		AbstractSyntaxicNode& operator=(AbstractSyntaxicNode &&other) = delete;
 		virtual ~AbstractSyntaxicNode();
 		
-		virtual Any eval(SimuData *sd) const = 0;
+		virtual Any eval(WorkspaceData *sd) const = 0;
 		virtual QString toStringHelper(int offset) const = 0;
 		
 		AbstractSyntaxicNode* parent() const;

@@ -4,7 +4,7 @@
 
 #include <QMainWindow>
 #include "../FORMULA_INTERPRETER/FormulaInterpreter.h"
-#include "../DATA_AND_OPERATORS/ProjectData.h"
+#include "../DATA_AND_OPERATORS/WorkspaceData.h"
 class TextEdit;
 class LineEdit;
 class QVBoxLayout;
@@ -39,7 +39,7 @@ class MainWindow : public QMainWindow
 		LineEdit *lineCommand;
 		
 		FormulaInterpreter m_interpreter;
-		SimuData m_workspace;
+		WorkspaceData m_workspace;
 		bool m_bFirstFormula;
 };
 

@@ -18,7 +18,7 @@ SyntaxicNodeLValue::SyntaxicNodeLValue(const QString &varName, AbstractSyntaxicN
 }
 
 // EVAL ///////////////////////////////////////////////////////////////////////
-Any SyntaxicNodeLValue::eval(SimuData *sd) const
+Any SyntaxicNodeLValue::eval(WorkspaceData *sd) const
 {
 	if (!sd)
 	{

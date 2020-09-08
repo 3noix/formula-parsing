@@ -16,7 +16,7 @@ class SyntaxicNodeBinaryOperator : public AbstractSyntaxicNode
 		SyntaxicNodeBinaryOperator& operator=(SyntaxicNodeBinaryOperator &&other) = delete;
 		virtual ~SyntaxicNodeBinaryOperator() = default;
 		
-		virtual Any eval(SimuData *sd) const override final;
+		virtual Any eval(WorkspaceData *sd) const override final;
 		virtual QString toStringHelper(int offset) const override final;
 		
 		
