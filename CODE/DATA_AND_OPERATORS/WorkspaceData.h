@@ -4,15 +4,15 @@
 
 #include <QMap>
 #include <QString>
-#include <boost/any.hpp>
-using Any = boost::any;
+#include <any>
+using Any = std::any;
 
 
 // ISA ////////////////////////////////////////////////////////////////////////
 template <typename T>
 bool isa(const Any &a)
 {
-	return boost::any_cast<T>(&a);
+	return std::any_cast<T>(&a);
 };
 
 
@@ -22,11 +22,11 @@ T convertTo(const Any &a, bool *ok = nullptr)
 {
 	try
 	{
-		T t = boost::any_cast<T>(a);
+		T t = std::any_cast<T>(a);
 		if (ok) {*ok = true;}
 		return t;
 	}
-	catch (const boost::bad_any_cast &)
+	catch (const std::bad_any_cast &)
 	{
 		if (ok) {*ok = false;}
 		return T{};

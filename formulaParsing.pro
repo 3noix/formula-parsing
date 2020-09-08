@@ -8,14 +8,11 @@ CONFIG(release, debug|release) {
 
 TEMPLATE = app
 TARGET = FormulaParsing
-CONFIG += c++11
+CONFIG += c++17
 DESTDIR = $$MODE
 OBJECTS_DIR = $$DESTDIR/objects
 MOC_DIR = $$DESTDIR/moc
 QT = core gui widgets
-
-
-INCLUDEPATH += $$(BOOST_PATH)
 
 
 HEADERS +=  CODE/GUI/MainWindow.h \
