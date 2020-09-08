@@ -36,7 +36,7 @@ bool isRelease()
 // DEBUG OR RELEASE ///////////////////////////////////////////////////////////
 QString debugOrRelease()
 {
-	QStringList list = QCoreApplication::applicationDirPath().split('/',QString::SkipEmptyParts);
+	QStringList list = QCoreApplication::applicationDirPath().split('/',Qt::SkipEmptyParts);
 	if (list.size() == 0) {return "release";}
 	
 	QString s = list.last();
@@ -51,7 +51,7 @@ QString debugOrRelease()
 QString shortName(QString path)
 {
 	path = path.replace('\\','/');
-	QStringList list = path.split('/',QString::SkipEmptyParts);
+	QStringList list = path.split('/',Qt::SkipEmptyParts);
 	if (list.size() == 0) {return {};}
 	return list.last();
 }
@@ -60,7 +60,7 @@ QString shortName(QString path)
 QString dirName(QString path)
 {
 	path = path.replace('\\','/');
-	QStringList list = path.split('/',QString::SkipEmptyParts);
+	QStringList list = path.split('/',Qt::SkipEmptyParts);
 	if (list.size() == 0) {return {};}
 	list.removeLast();
 	return list.join("/");
@@ -89,8 +89,8 @@ QString absolute2relative(QString refPath, QString absPath)
 		return absPath;
 	}
 	
-	QStringList refList = refPath.split('/',QString::SkipEmptyParts);
-	QStringList absList = absPath.split('/',QString::SkipEmptyParts);
+	QStringList refList = refPath.split('/',Qt::SkipEmptyParts);
+	QStringList absList = absPath.split('/',Qt::SkipEmptyParts);
 	if (bDoubleSlashRef && bDoubleSlashAbs && refList[0] != absList[0])
 	{
 		// both are windows UNC paths but not from the same root
