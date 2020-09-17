@@ -28,12 +28,14 @@ int WorkspaceData::nbParameters() const
 
 QStringList WorkspaceData::parameters() const
 {
-	return m_map.keys();
+	QStringList params;
+	for (auto pair : m_map) {params << pair.first;}
+	return params;
 }
 
 bool WorkspaceData::hasParameter(const QString &param) const
 {
-	return m_map.contains(param);
+	return m_map.count(param) > 0;
 }
 
 Any& WorkspaceData::operator[](const QString &param)
@@ -41,20 +43,13 @@ Any& WorkspaceData::operator[](const QString &param)
 	return m_map[param];
 }
 
-const Any WorkspaceData::operator[](const QString &param) const
+const Any& WorkspaceData::operator[](const QString &param) const
 {
-	return m_map[param];
-}
-
-void WorkspaceData::addParameter(const QString &param, const Any &data)
-{
-	m_map.insert(param,data);
+	return m_map.at(param);
 }
 
 bool WorkspaceData::removeParameter(const QString &param)
 {
-	if (!m_map.contains(param)) {return false;}
-	m_map.remove(param);
-	return true;
+	return m_map.erase(param) > 0;
 }
 

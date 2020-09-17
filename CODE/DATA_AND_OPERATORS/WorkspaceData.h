@@ -2,7 +2,7 @@
 #define WORKSPACE_DATA
 
 
-#include <QMap>
+#include <map>
 #include <QString>
 #include <any>
 using Any = std::any;
@@ -53,13 +53,12 @@ class WorkspaceData
 		QStringList parameters() const;
 		bool hasParameter(const QString &param) const;
 		Any& operator[](const QString &param);
-		const Any operator[](const QString &param) const;
-		void addParameter(const QString &param, const Any &data);
+		const Any& operator[](const QString &param) const;
 		bool removeParameter(const QString &param);
 		
 		
 	private:
-		QMap<QString,Any> m_map;
+		std::map<QString,Any> m_map;
 };
 
 
