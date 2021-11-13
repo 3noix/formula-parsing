@@ -5,8 +5,8 @@
 #include "SyntaxicNodeUnaryOperator.h"
 #include "SyntaxicNodeBinaryOperator.h"
 
-#include "../DATA_AND_OPERATORS/AnyOperators.h"
-#include "../DATA_AND_OPERATORS/AnyFunctions.h"
+#include "../data-and-operators/AnyOperators.h"
+#include "../data-and-operators/AnyFunctions.h"
 
 
 ///////////////////////////////////////////////////////////////////////////////

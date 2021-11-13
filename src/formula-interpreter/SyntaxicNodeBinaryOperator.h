@@ -3,7 +3,7 @@
 
 
 #include "AbstractSyntaxicNode.h"
-#include "../DATA_AND_OPERATORS/BinaryOperator.h"
+#include "../data-and-operators/BinaryOperator.h"
 
 
 class SyntaxicNodeBinaryOperator : public AbstractSyntaxicNode

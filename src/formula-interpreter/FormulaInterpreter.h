@@ -6,7 +6,7 @@
 #include <QMap>
 
 #include "Token.h"
-#include "../DATA_AND_OPERATORS/WorkspaceData.h"
+#include "../data-and-operators/WorkspaceData.h"
 class AbstractSyntaxicNode;
 
 

@@ -3,7 +3,7 @@
 
 
 #include "AbstractSyntaxicNode.h"
-#include "../DATA_AND_OPERATORS/UnaryOperator.h"
+#include "../data-and-operators/UnaryOperator.h"
 
 
 class SyntaxicNodeUnaryOperator : public AbstractSyntaxicNode
